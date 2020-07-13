@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Redirect } from '@reach/router';
 import { accessKey } from '../config';
 
@@ -32,5 +32,5 @@ export default () => {
     );
   }
 
-  return <Redirect to='/dashboard' />;
+  return <Redirect to='/dashboard/' />;
 };
