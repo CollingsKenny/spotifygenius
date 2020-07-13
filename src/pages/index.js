@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+import { stateKey } from '../config';
 
 export default () => {
   const authorize = () => {
@@ -9,7 +10,7 @@ export default () => {
     const scopes = ['user-read-recently-played'];
 
     const state = uuid();
-    localStorage.setItem('stateKey', state);
+    localStorage.setItem(stateKey, state);
 
     return `${url}?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`;
   };
