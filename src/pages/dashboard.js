@@ -8,6 +8,17 @@ import SongList from '../containers/songList';
 import ArtistList from '../containers/artistList';
 import FancyButton from '../components/fancyButton';
 
+const Container = styled.div`
+  ${tw`
+    bg-black
+  `}
+`;
+const TermNav = styled.nav`
+  ${tw`
+  flex justify-center
+  `}
+`;
+
 const Frame = styled.div`
   ${tw`
     flex 
@@ -19,22 +30,7 @@ const Frame = styled.div`
   `}
 `;
 
-const TermButton = styled.div`
-  ${tw`bg-black border border-green-500 hover:bg-green-500 text-green-500 hover:text-black font-bold py-2 px-4 rounded-md shadow-md mx-4 cursor-pointer`}
-`;
-
 export default () => {
-  /* State */
-  const key = localStorage[accessKey];
-  const [userTaste, setUserTaste] = useState({ tracks: [], artists: [] });
-  const [term, setTerm] = useState('medium');
-
-  const [tracksFeatures, setTracksFeatures] = useState(null);
-
-  const handleClick = (e) => {
-    setTerm(e.target.id);
-  };
-
   /* Calls Spotify Taste Endpoint */
   const getUserTaste = async (accessToken, tasteType) => {
     const {
@@ -62,6 +58,7 @@ export default () => {
     }
   };
 
+  /* Calls Spotify Audio Features */
   const getTracksFeatures = async (accessToken, tracks) => {
     const res = await axios.get(
       `https://api.spotify.com/v1/audio-features?ids=${tracks}`,
@@ -76,33 +73,39 @@ export default () => {
     setTracksFeatures(res.data.audio_features);
   };
 
+  /* State */
+  const key = localStorage[accessKey];
+  const [userTaste, setUserTaste] = useState({ tracks: [], artists: [] });
+  const [tracksFeatures, setTracksFeatures] = useState(null);
+  const [term, setTerm] = useState('medium');
+
+  const termClick = (e) => {
+    setTerm(e.target.id);
+  };
+
   React.useEffect(() => {
     getUserTaste(key, 'artists');
     getUserTaste(key, 'tracks');
   }, [term]);
 
   return (
-    <div className='bg-black'>
-      <div className='flex justify-center'>
-        <FancyButton id='long' onClick={handleClick} active={term === 'long'}>
+    <Container>
+      <TermNav>
+        <FancyButton id='long' onClick={termClick} active={term === 'long'}>
           All-Time
         </FancyButton>
-        <FancyButton
-          id='medium'
-          onClick={handleClick}
-          active={term === 'medium'}
-        >
+        <FancyButton id='medium' onClick={termClick} active={term === 'medium'}>
           This Year
         </FancyButton>
-        <FancyButton id='short' onClick={handleClick} active={term === 'short'}>
+        <FancyButton id='short' onClick={termClick} active={term === 'short'}>
           This Month
         </FancyButton>
-      </div>
+      </TermNav>
 
       <Frame>
         <ArtistList artists={userTaste.artists} />
         <SongList tracks={userTaste.tracks} features={tracksFeatures} />
       </Frame>
-    </div>
+    </Container>
   );
 };
