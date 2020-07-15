@@ -4,6 +4,9 @@ import tw from 'tailwind.macro';
 import styled from '@emotion/styled';
 import { accessKey } from '../config';
 
+import SongList from '../containers/songList';
+import ArtistList from '../containers/artistList';
+
 const Frame = styled.div`
   ${tw`
     flex 
@@ -18,39 +21,6 @@ const Frame = styled.div`
 const TermButton = styled.div`
   ${tw`bg-black border border-green-500 hover:bg-green-500 text-green-500 hover:text-black font-bold py-2 px-4 rounded-md shadow-md mx-4 cursor-pointer`}
 `;
-
-const HeaderText = styled.div`
-  ${tw`
-  text-3xl
-  font-bold
-  text-green-500
-
-`}
-`;
-
-const Ul = styled.ul`
-  ${tw`
-  h-full list-disc ml-3
-   `}
-`;
-
-const Li = styled.ul`
-  ${tw`
-  py-2 text-green-500
-   `}
-`;
-
-const convertValenceToEmoji = (valence) => {
-  if (valence < 0.1) return '😭';
-  else if (valence < 0.2) return '😩';
-  else if (valence < 0.3) return '☹️';
-  else if (valence < 0.4) return '🙁';
-  else if (valence < 0.5) return '😐';
-  else if (valence < 0.6) return '🙂';
-  else if (valence < 0.7) return '😀';
-  else if (valence < 0.8) return '😄';
-  else return '😁';
-};
 
 export default () => {
   /* State */
@@ -82,7 +52,7 @@ export default () => {
       [tasteType]: res.data.items,
     }));
     if (tasteType === 'tracks') {
-      getTracksFeatures(
+      await getTracksFeatures(
         accessToken,
         res.data.items.map((track) => track.id)
       );
@@ -109,12 +79,9 @@ export default () => {
     getUserTaste(key, 'artists');
   }, [term]);
 
-  if (!tracksFeatures) {
-    return <p>Loading!</p>;
-  }
   return (
-    <div class='bg-black'>
-      <div class='flex justify-center'>
+    <div className='bg-black'>
+      <div className='flex justify-center'>
         <TermButton id='long' onClick={handleClick}>
           All-Time
         </TermButton>
@@ -127,36 +94,8 @@ export default () => {
       </div>
 
       <Frame>
-        <div>
-          <HeaderText>Your Favorite Artists</HeaderText>
-          <Ul>
-            {userTaste.artists.map((item) => {
-              if (item.name === 'Kanye West')
-                return (
-                  <Li>
-                    Kanye West <span role='img'>🌊</span>
-                  </Li>
-                );
-              return <Li>{item.name} </Li>;
-            })}
-          </Ul>
-        </div>
-
-        <div>
-          <HeaderText>Your Favorite Songs</HeaderText>
-          <Ul>
-            {userTaste.tracks.map((item, index) => {
-              return (
-                <Li>
-                  <span role='img'>
-                    {convertValenceToEmoji(tracksFeatures[index].valence)}
-                  </span>{' '}
-                  {item.album.artists[0].name} - {item.name}{' '}
-                </Li>
-              );
-            })}
-          </Ul>
-        </div>
+        <ArtistList artists={userTaste.artists} />
+        <SongList tracks={userTaste.tracks} features={tracksFeatures} />
       </Frame>
     </div>
   );
