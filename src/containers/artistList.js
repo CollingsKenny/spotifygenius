@@ -29,18 +29,22 @@ const ArtistList = ({ artists }) => {
       <HeaderText>Your Favorite Artists</HeaderText>
 
       <Ul>
-        {artists.map((artist) => {
-          if (artist.name === 'Kanye West')
-            return (
-              <Li key={artist.id}>
-                Kanye West{' '}
-                <span role='img' aria-label='Wavy'>
-                  🌊
-                </span>
-              </Li>
-            );
-          return <Li key={artist.id}>{artist.name} </Li>;
-        })}
+        {!artists ? (
+          <Li>Loading...</Li>
+        ) : (
+          artists.map((artist) => {
+            if (artist.name === 'Kanye West')
+              return (
+                <Li key={artist.id}>
+                  Kanye West{' '}
+                  <span role='img' aria-label='Wavy'>
+                    🌊
+                  </span>
+                </Li>
+              );
+            return <Li key={artist.id}>{artist.name} </Li>;
+          })
+        )}
       </Ul>
     </div>
   );

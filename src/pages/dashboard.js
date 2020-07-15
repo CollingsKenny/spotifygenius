@@ -6,6 +6,7 @@ import { accessKey } from '../config';
 
 import SongList from '../containers/songList';
 import ArtistList from '../containers/artistList';
+import FancyButton from '../components/fancyButton';
 
 const Frame = styled.div`
   ${tw`
@@ -36,7 +37,9 @@ export default () => {
 
   /* Calls Spotify Taste Endpoint */
   const getUserTaste = async (accessToken, tasteType) => {
-    const res = await axios.get(
+    const {
+      data: { items },
+    } = await axios.get(
       `https://api.spotify.com/v1/me/top/${tasteType}?time_range=${term}_term&limit=10`,
       {
         headers: {
@@ -49,12 +52,12 @@ export default () => {
     // console.log(tasteType);
     setUserTaste((prevState) => ({
       ...prevState,
-      [tasteType]: res.data.items,
+      [tasteType]: items,
     }));
     if (tasteType === 'tracks') {
-      await getTracksFeatures(
+      getTracksFeatures(
         accessToken,
-        res.data.items.map((track) => track.id)
+        items.map((track) => track.id)
       );
     }
   };
@@ -69,28 +72,31 @@ export default () => {
         },
       }
     );
-    console.log(res.data.audio_features);
 
     setTracksFeatures(res.data.audio_features);
   };
 
   React.useEffect(() => {
-    getUserTaste(key, 'tracks');
     getUserTaste(key, 'artists');
+    getUserTaste(key, 'tracks');
   }, [term]);
 
   return (
     <div className='bg-black'>
       <div className='flex justify-center'>
-        <TermButton id='long' onClick={handleClick}>
+        <FancyButton id='long' onClick={handleClick} active={term === 'long'}>
           All-Time
-        </TermButton>
-        <TermButton id='medium' onClick={handleClick}>
+        </FancyButton>
+        <FancyButton
+          id='medium'
+          onClick={handleClick}
+          active={term === 'medium'}
+        >
           This Year
-        </TermButton>
-        <TermButton id='short' onClick={handleClick}>
+        </FancyButton>
+        <FancyButton id='short' onClick={handleClick} active={term === 'short'}>
           This Month
-        </TermButton>
+        </FancyButton>
       </div>
 
       <Frame>
