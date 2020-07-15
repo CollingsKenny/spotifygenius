@@ -47,31 +47,27 @@ export default () => {
   const key = 'BQC1cywahDxID4Za6iNf23nBzMNFwhXmL7wvtakcVqhd7jq2Ts5M5pj2cSgCLykno2sJgJHFVD4LR6jI86dQZQ34C0t1Jz6H-OOkHTimi3kAWFcbDWFs7xtwkVU319YaAlVdXO7X4iIxCU3qd8e4NqJy_XA'
   const [userTaste, setUserTaste] = useState({ tracks: [], artists: [] })
 
+  const getUserTaste = async (accessToken, tasteType) => {
+    const res = await axios.get(`https://api.spotify.com/v1/me/top/${tasteType}`,
+      { headers: { "Authorization": `Bearer ${accessToken}` } })
+    console.log(res.data.items)
+    console.log(tasteType)
+    setUserTaste(prevState => ({ ...prevState, [tasteType]: res.data.items }))
+  }
+
   React.useEffect(() => {
-    const getUserTracks = async (accessToken) => {
-      const res = await axios.get('https://api.spotify.com/v1/me/top/tracks',
-        { headers: { "Authorization": `Bearer ${accessToken}` } })
-      console.log(res.data.items)
-      setUserTaste({ ...userTaste, tracks: res.data.items })
-    }
-    const getUserArtists = async (accessToken) => {
-      const res = await axios.get('https://api.spotify.com/v1/me/top/artists',
-        { headers: { "Authorization": `Bearer ${accessToken}` } })
-      console.log(res.data.items)
-      setUserTaste({ ...userTaste, artists: res.data.items })
-    }
-    getUserTracks(key);
-    getUserArtists(key);
+    getUserTaste(key, 'tracks');
+    getUserTaste(key, 'artists');
   }, []);
 
   return (
     <Frame>
-
       <div>
         <HeaderText>Your Favorite Artists</HeaderText>
         <ul className='h-full list-disc ml-3'>
+          {console.log(userTaste)}
           {userTaste.artists.map(item => {
-            return <li className='py-2' key={item.id}>{item.name} </li>
+            return <li className='py-2'>{item.name} </li>
           })}
         </ul>
       </div>
@@ -79,8 +75,8 @@ export default () => {
       <div>
         <HeaderText>Your Favorite Songs</HeaderText>
         <ul className='h-full list-disc ml-3'>
-          {userTaste.tracks.map((item, index) => {
-            return <li className='py-2' key={index}>{item.album.artists[0].name} - {item.name} </li>
+          {userTaste.tracks.map((item) => {
+            return <li className='py-2' >{item.album.artists[0].name} - {item.name} </li>
           })}
         </ul>
       </div>
