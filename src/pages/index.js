@@ -9,7 +9,7 @@ export default () => {
     const url = 'https://accounts.spotify.com/authorize';
     const clientId = 'c034101426734eb990996c5358c9a0b6';
     const redirectUri = 'http://localhost:3000/callback';
-    const scopes = ['user-read-recently-played'];
+    const scopes = ['user-read-recently-played', 'user-top-read'];
 
     const state = uuid();
     localStorage.setItem(stateKey, state);
