@@ -2,25 +2,19 @@ import React from 'react';
 import tw from 'tailwind.macro';
 import styled from '@emotion/styled';
 
-const HeaderText = styled.div`
-  ${tw`
-  text-3xl
-  font-bold
-  text-green-500
-
-`}
-`;
-
 const Ul = styled.ul`
-  ${tw`
-  h-full list-disc ml-3
-   `}
+  padding:0 2rem;
+  overflow-y:scroll;
+  list-style:disc;
+  white-space:nowrap;
 `;
 
 const Li = styled.ul`
-  ${tw`
-  py-2 text-green-500
-   `}
+  margin:0.5rem 0;
+  font-size:20px;
+  font-weight:bold;
+  color:#FFF;
+  overflow-x:hidden;
 `;
 
 const convertValenceToEmoji = (valence) => {
@@ -38,22 +32,21 @@ const convertValenceToEmoji = (valence) => {
 const SongList = ({ tracks, features }) => {
   return (
     <div>
-      <HeaderText>Your Favorite Songs</HeaderText>
       <Ul>
         {!tracks || !features ? (
           <Li>Loading...</Li>
         ) : (
-          tracks.map((track, index) => {
-            return (
-              <Li key={track.id}>
-                <span role='img'>
-                  {convertValenceToEmoji(features[index].valence)}
-                </span>{' '}
-                {track.album.artists[0].name} - {track.name}{' '}
-              </Li>
-            );
-          })
-        )}
+            tracks.map((track, index) => {
+              return (
+                <Li key={track.id}>
+                  <span role='img'>
+                    {convertValenceToEmoji(features[index].valence)}
+                  </span>{' '}
+                  {track.album.artists[0].name} - {track.name}{' '}
+                </Li>
+              );
+            })
+          )}
       </Ul>
     </div>
   );

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import ArtistList from './artistList';
+import SongList from './songList';
 
 const Card = styled.article`
     width:410px;
@@ -14,20 +16,25 @@ const Card = styled.article`
 
 const TasteTitle = styled.h2`
     font-family: Work Sans, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size:48px;
-    padding: 1rem 1rem;
+    font-size:40px;
+    font-weight:bold;
+    color:#FFF;
+    padding: 1rem 2rem 0;
 `;
 
-const ItemTitle = styled.h4`
-    font-family: Work Sans, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size:24px;
-    padding: 1rem 1rem;
+const CardContent = styled.div`
+    overflow-x:hidden;
+    overflow-y:scroll;
 `;
 
-const TasteCard = ({ type, items }) => {
+
+const TasteCard = ({ type, items, features }) => {
     return (
         <Card>
             <TasteTitle>{type}</TasteTitle>
+            <CardContent>
+                {type === 'Artists' ? <ArtistList artists={items} /> : <SongList tracks={items} features={features} />}
+            </CardContent>
         </Card>
     );
 }

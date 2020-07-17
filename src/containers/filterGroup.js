@@ -29,7 +29,7 @@ const FilterInput = styled.div`
 `;
 const InputText = styled.h6`
     font-weight:bold;
-    font-size:24px;
+    font-size:28px;
 
 `
 

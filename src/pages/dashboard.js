@@ -116,7 +116,7 @@ export default () => {
           'Content-Type': 'application/json',
         },
       }
-    );
+      );
     // console.log(res.data.items);
     // console.log(tasteType);
     setUserTaste((prevState) => ({
@@ -205,9 +205,9 @@ export default () => {
           <CategoryContentWrapper>
             <CategorySubTitle>Your Favorite Artists & Songs This Month</CategorySubTitle>
             <CategoryContentDisplay>
-              <TasteCard />
-              <FilterGroup/>
-              <TasteCard />
+              <TasteCard type={"Artists"} items={userTaste.artists} />
+              <FilterGroup />
+              <TasteCard type={"Songs"} items={userTaste.tracks} features={tracksFeatures} />
             </CategoryContentDisplay>
           </CategoryContentWrapper>
         </CategoryFrame>
