@@ -4,9 +4,16 @@ import tw from 'tailwind.macro';
 import styled from '@emotion/styled';
 import { Icon, InlineIcon } from '@iconify/react';
 import heartIcon from '@iconify/icons-heroicons-outline/heart';
-
+import chartSquareBar from '@iconify/icons-heroicons-outline/chart-square-bar';
+import fireIcon from '@iconify/icons-heroicons-outline/fire';
+import newspaperIcon from '@iconify/icons-heroicons-outline/newspaper';
+import emojiHappy from '@iconify/icons-heroicons-outline/emoji-happy';
+import userIcon from '@iconify/icons-heroicons-outline/user';
+import cogIcon from '@iconify/icons-heroicons-outline/cog';
 
 import { accessKey } from '../config';
+import TasteCard from '../containers/tasteCard';
+import FilterGroup from '../containers/filterGroup';
 import SongList from '../containers/songList';
 import ArtistList from '../containers/artistList';
 import FancyButton from '../components/fancyButton';
@@ -20,6 +27,7 @@ const Container = styled.main`
 `;
 const DashboardFrame = styled.div`
   display:flex;
+  justify-content:start;
   width:100%;
   height:685px;
   margin: 2rem 4rem;
@@ -27,7 +35,47 @@ const DashboardFrame = styled.div`
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
   border-radius:50px;
 `;
+const CategoryFrame = styled.section`
+  display:flex;
+  flex-direction:column;
+  width:100%;
 
+`;
+const CategoryHeader = styled.div`
+  height:87px;
+  width:inherit;
+  padding:0.5rem 2rem;
+  text-align:left;
+  border-bottom: 1px solid #656464;
+
+`;
+const CategoryTitle = styled.h2`
+  font-family:Work Sans, -apple-system, BlinkMacSystemFont;
+  font-weight:bold;
+  font-size:48px;
+  color: #FFF;
+`;
+
+const CategorySubTitle = styled.h2`
+  font-family:Work Sans, -apple-system, BlinkMacSystemFont;
+  font-weight:bold;
+  font-size:36px;
+  color: #FFF;
+`;
+
+const CategoryContentWrapper = styled.article`
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding: 1rem 4rem;
+  `;
+const CategoryContentDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding:1rem 0;
+
+`;
 const NavSidebar = styled.aside`
   display:flex;
   flex-direction:column; 
@@ -47,7 +95,7 @@ const IconContainer = styled.div`
   margin:1rem 1rem;
 `;
 
-const UserProfilePhoto = styled.div`
+const UserProfilePhoto = styled.img`
   width:53px;
   height:53px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -126,27 +174,43 @@ export default () => {
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={heartIcon} />
+            <Icon width="35" height="40" color="#3A3A3A" icon={chartSquareBar} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={heartIcon} />
+            <Icon width="35" height="40" color="#3A3A3A" icon={fireIcon} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={heartIcon} />
+            <Icon width="35" height="40" color="#3A3A3A" icon={newspaperIcon} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={heartIcon} />
+            <Icon width="35" height="40" color="#3A3A3A" icon={emojiHappy} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={heartIcon} />
+            <Icon width="35" height="40" color="#3A3A3A" icon={userIcon} />
           </IconContainer>
           <SideBarDivider />
-
+          <IconContainer>
+            <Icon width="35" height="40" color="#3A3A3A" icon={cogIcon} />
+          </IconContainer>
+          <h1>Settings</h1>
         </NavSidebar>
+        <CategoryFrame>
+          <CategoryHeader>
+            <CategoryTitle>Favorites</CategoryTitle>
+          </CategoryHeader>
+          <CategoryContentWrapper>
+            <CategorySubTitle>Your Favorite Artists & Songs This Month</CategorySubTitle>
+            <CategoryContentDisplay>
+              <TasteCard />
+              <FilterGroup/>
+              <TasteCard />
+            </CategoryContentDisplay>
+          </CategoryContentWrapper>
+        </CategoryFrame>
       </DashboardFrame>
     </Container>
   );
