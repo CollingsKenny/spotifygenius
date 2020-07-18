@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import tw from 'tailwind.macro';
 import styled from '@emotion/styled';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import heartIcon from '@iconify/icons-heroicons-outline/heart';
 import chartSquareBar from '@iconify/icons-heroicons-outline/chart-square-bar';
 import fireIcon from '@iconify/icons-heroicons-outline/fire';
@@ -14,94 +13,86 @@ import cogIcon from '@iconify/icons-heroicons-outline/cog';
 import { accessKey } from '../config';
 import TasteCard from '../containers/tasteCard';
 import FilterGroup from '../containers/filterGroup';
-import SongList from '../containers/songList';
-import ArtistList from '../containers/artistList';
-import FancyButton from '../components/fancyButton';
-
 
 const Container = styled.main`
-  display:flex;
-  width:100%;
-  height:900px;
-  background:#222222;
+  display: flex;
+  width: 100%;
+  height: 900px;
+  background: #222222;
 `;
 const DashboardFrame = styled.div`
-  display:flex;
-  justify-content:start;
-  width:100%;
-  height:685px;
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  height: 685px;
   margin: 2rem 4rem;
-  background: #3A3A3A;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-  border-radius:50px;
+  background: #3a3a3a;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
 `;
 const CategoryFrame = styled.section`
-  display:flex;
-  flex-direction:column;
-  width:100%;
-
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 const CategoryHeader = styled.div`
-  height:87px;
-  width:inherit;
-  padding:0.5rem 2rem;
-  text-align:left;
+  height: 87px;
+  width: inherit;
+  padding: 0.5rem 2rem;
+  text-align: left;
   border-bottom: 1px solid #656464;
-
 `;
 const CategoryTitle = styled.h2`
-  font-family:Work Sans, -apple-system, BlinkMacSystemFont;
-  font-weight:bold;
-  font-size:48px;
-  color: #FFF;
+  font-family: Work Sans, -apple-system, BlinkMacSystemFont;
+  font-weight: bold;
+  font-size: 48px;
+  color: #fff;
 `;
 
 const CategorySubTitle = styled.h2`
-  font-family:Work Sans, -apple-system, BlinkMacSystemFont;
-  font-weight:bold;
-  font-size:36px;
-  color: #FFF;
+  font-family: Work Sans, -apple-system, BlinkMacSystemFont;
+  font-weight: bold;
+  font-size: 36px;
+  color: #fff;
 `;
 
 const CategoryContentWrapper = styled.article`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 1rem 4rem;
-  `;
+`;
 const CategoryContentDisplay = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding:1rem 0;
-
+  padding: 1rem 0;
 `;
 const NavSidebar = styled.aside`
-  display:flex;
-  flex-direction:column; 
-  align-items:center;
-  width:135px;
-  height:685px;
-  background:#1DB954;
-  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 50px 0px 0px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 135px;
+  height: 685px;
+  background: #1db954;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px 0 0 50px;
 `;
 const SideBarDivider = styled.div`
-  width:135px;
-  border: 1px solid #3A3A3A;
+  width: 135px;
+  border: 1px solid #3a3a3a;
 `;
 
 const IconContainer = styled.div`
-  margin:1rem 1rem;
+  margin: 1rem 1rem;
 `;
 
 const UserProfilePhoto = styled.img`
-  width:53px;
-  height:53px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  width: 53px;
+  height: 53px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 259.5px;
 `;
-
 
 export default () => {
   /* Calls Spotify Taste Endpoint */
@@ -116,7 +107,7 @@ export default () => {
           'Content-Type': 'application/json',
         },
       }
-      );
+    );
     // console.log(res.data.items);
     // console.log(tasteType);
     setUserTaste((prevState) => ({
@@ -170,31 +161,36 @@ export default () => {
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={heartIcon} />
+            <Icon width='35' height='40' color='#3A3A3A' icon={heartIcon} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={chartSquareBar} />
+            <Icon
+              width='35'
+              height='40'
+              color='#3A3A3A'
+              icon={chartSquareBar}
+            />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={fireIcon} />
+            <Icon width='35' height='40' color='#3A3A3A' icon={fireIcon} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={newspaperIcon} />
+            <Icon width='35' height='40' color='#3A3A3A' icon={newspaperIcon} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={emojiHappy} />
+            <Icon width='35' height='40' color='#3A3A3A' icon={emojiHappy} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={userIcon} />
+            <Icon width='35' height='40' color='#3A3A3A' icon={userIcon} />
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
-            <Icon width="35" height="40" color="#3A3A3A" icon={cogIcon} />
+            <Icon width='35' height='40' color='#3A3A3A' icon={cogIcon} />
           </IconContainer>
           <h1>Settings</h1>
         </NavSidebar>
@@ -203,11 +199,17 @@ export default () => {
             <CategoryTitle>Favorites</CategoryTitle>
           </CategoryHeader>
           <CategoryContentWrapper>
-            <CategorySubTitle>Your Favorite Artists & Songs This Month</CategorySubTitle>
+            <CategorySubTitle>
+              Your Favorite Artists & Songs This Month
+            </CategorySubTitle>
             <CategoryContentDisplay>
-              <TasteCard type={"Artists"} items={userTaste.artists} />
+              <TasteCard type={'Artists'} items={userTaste.artists} />
               <FilterGroup />
-              <TasteCard type={"Songs"} items={userTaste.tracks} features={tracksFeatures} />
+              <TasteCard
+                type={'Songs'}
+                items={userTaste.tracks}
+                features={tracksFeatures}
+              />
             </CategoryContentDisplay>
           </CategoryContentWrapper>
         </CategoryFrame>

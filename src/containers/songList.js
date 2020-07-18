@@ -1,20 +1,19 @@
 import React from 'react';
-import tw from 'tailwind.macro';
 import styled from '@emotion/styled';
 
 const Ul = styled.ul`
-  padding:0 2rem;
-  overflow-y:scroll;
-  list-style:disc;
-  white-space:nowrap;
+  padding: 0 2rem;
+  overflow-y: scroll;
+  list-style: disc;
+  white-space: nowrap;
 `;
 
 const Li = styled.ul`
-  margin:0.5rem 0;
-  font-size:20px;
-  font-weight:bold;
-  color:#FFF;
-  overflow-x:hidden;
+  margin: 0.5rem 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  overflow-x: hidden;
 `;
 
 const convertValenceToEmoji = (valence) => {
@@ -36,17 +35,17 @@ const SongList = ({ tracks, features }) => {
         {!tracks || !features ? (
           <Li>Loading...</Li>
         ) : (
-            tracks.map((track, index) => {
-              return (
-                <Li key={track.id}>
-                  <span role='img'>
-                    {convertValenceToEmoji(features[index].valence)}
-                  </span>{' '}
-                  {track.album.artists[0].name} - {track.name}{' '}
-                </Li>
-              );
-            })
-          )}
+          tracks.map((track, index) => {
+            return (
+              <Li key={track.id}>
+                <span role='img'>
+                  {convertValenceToEmoji(features[index].valence)}
+                </span>{' '}
+                {track.album.artists[0].name} - {track.name}{' '}
+              </Li>
+            );
+          })
+        )}
       </Ul>
     </div>
   );

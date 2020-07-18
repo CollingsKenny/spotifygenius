@@ -1,7 +1,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { stateKey } from '../config';
-import tw from 'tailwind.macro';
 import styled from '@emotion/styled';
 
 export default () => {
@@ -18,11 +17,7 @@ export default () => {
   };
 
   const Button = styled.div`
-    ${tw`px-4 
-    py-2
-    bg-blue-100
-    rounded-md
-    shadow-md`}
+    background: skyblue;
   `;
 
   return (
