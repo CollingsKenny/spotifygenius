@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Redirect } from '@reach/router';
 import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
 import heartIcon from '@iconify/icons-heroicons-outline/heart';
@@ -11,6 +12,7 @@ import userIcon from '@iconify/icons-heroicons-outline/user';
 import cogIcon from '@iconify/icons-heroicons-outline/cog';
 
 import { accessKey } from '../config';
+import useGetProfile from '../useGetProfile';
 import TasteCard from '../containers/tasteCard';
 import FilterGroup from '../containers/filterGroup';
 
@@ -94,7 +96,7 @@ const UserProfilePhoto = styled.img`
   border-radius: 259.5px;
 `;
 
-export default () => {
+function Dashboard() {
   /* Calls Spotify Taste Endpoint */
   const getUserTaste = async (accessToken, tasteType) => {
     const {
@@ -142,6 +144,7 @@ export default () => {
   const [userTaste, setUserTaste] = useState({ tracks: [], artists: [] });
   const [tracksFeatures, setTracksFeatures] = useState(null);
   const [term, setTerm] = useState('medium');
+  const profile = useGetProfile(key);
 
   const termClick = (e) => {
     setTerm(e.target.id);
@@ -152,12 +155,20 @@ export default () => {
     getUserTaste(key, 'tracks');
   }, [term]);
 
+  if (profile.error) {
+    return <Redirect to='/' />;
+  }
   return (
     <Container>
       <DashboardFrame>
         <NavSidebar>
           <IconContainer>
-            <UserProfilePhoto src='https://res.cloudinary.com/dtu8zsq1c/image/upload/v1594601133/portfolio-assets/download20200700162348_b4rglf.png'></UserProfilePhoto>
+            {!profile.loading && (
+              <UserProfilePhoto
+                src={profile.user.images[0].url}
+                alt={profile.user.display_name}
+              ></UserProfilePhoto>
+            )}
           </IconContainer>
           <SideBarDivider />
           <IconContainer>
@@ -216,4 +227,6 @@ export default () => {
       </DashboardFrame>
     </Container>
   );
-};
+}
+
+export default Dashboard;
