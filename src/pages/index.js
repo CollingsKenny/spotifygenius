@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { stateKey } from '../config';
 import styled from '@emotion/styled';
-import facepaint from 'facepaint'
+import facepaint from 'facepaint';
 
 import { Icon, InlineIcon } from '@iconify/react';
 import codeIcon from '@iconify/icons-heroicons-outline/code';
@@ -21,6 +21,7 @@ export default () => {
 
     return `${url}?response_type=token&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}&state=${state}`;
   };
+
   const mq = facepaint([
     '@media(min-width: 576px)',
     '@media(min-width: 768px)',
@@ -28,80 +29,149 @@ export default () => {
     '@media(min-width: 1120px)'
   ])
 
-  const Button = styled.div`
-  padding: 0 0.5rem;
-  border-bottom: 3px solid white;
-  color: white;
-  font-weight: bold;
-  font-size: 36px;
-  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;`;
+  /* Styled Components */
 
+  /* Containers */
   const Frame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   height: 100vh;
   background: #222;`;
 
   const Info = styled.section`
   display: flex;
   flex-grow: 2;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  @media (min-width: 1120px) {
+    flex-grow: 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 3rem 0;
+  }`;
+
+  const Titles = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 1rem 2rem 0;
+  color: white;
+  text-align: center;
+
+  @media (min-width: 992px) {
+    flex-grow: 2;
+  }`
+
+  const Icons = styled.article`
+  display: flex;
   justify-content: center;
-  padding: 8rem 3rem 0;`;
+  color: white;
 
+  @media (min-width: 992px) {
+    display: none;
+  }`;
+
+  const LargeIcons = styled.article`
+  display: none;
+  color: white;
+
+  @media (min-width: 992px) {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+  }`;
+
+  const Hills = styled.section`
+  display: flex;
+  align-items: flex-end;
+
+  @media (min-width: 768px) {
+    flex-grow: 2;
+  }`;
+
+  const HillContainer = styled.div`
+  z-index: 1;`;
+
+
+  /* Elements */
   const Anchor = styled.a`
-  position: absolute;
-  top: 90%;
-  left: 40%;
-  z-index: 10;
-  text-decoration: none;`;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 3rem;
 
+  @media (min-width: 1120px) {
+    display: none;
+  }`;
+
+  const LargeAnchor = styled.a`
+  display: none;
+
+  @media (min-width: 1120px) {
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    display: block;
+  }`;
+
+  const Button = styled.div`
+  padding: 0 0.5rem;
+  border-bottom: 3px solid white;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* Tablets */
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }`;
+
+  const IconSubtitle = styled.h3`
+  padding: 0 1rem;
+  font-weight: bold;
+  font-size: 32px;
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  @media (min-width: 992px) {
+    font-size: 56px;
+  }`;
+
+  /* Text */
   const Title = styled.h1`
   margin: 0 auto;
-  padding-top: 2rem;
   font-weight: bold;
-  font-size: 95px;
-  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;`;
-  
+  font-size: 40px;
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* Tablets */
+  @media (min-width: 768px) {
+    font-size: 56px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1120px) {
+    font-size: 95px;
+  }`;
+
   const Subtitle = styled.h3`
   margin: 0 auto;
   padding: 1rem 2rem;
   font-weight: bold;
-  font-size: 48px;
+  font-size: 20px;
   font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   letter-spacing: -0.015em;
-  text-align: center;`;
-  
-  const Titles = styled.article`
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 2rem;
-  color: white;
-  text-align: center;`
 
-  const Icons = styled.article`
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  color: white;`;
-
-  const IconSubtitle = styled.h3`
-  font-weight: bold;
-  font-size: 56px;
-  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  text-align: center;`;
-
-  const Hills = styled.section`
-  display: flex;
-  flex-grow: 1;
-  align-items: flex-end;`;
-
-  const HillContainer = styled.div`
-  flex: 1;
-  z-index: 1;`;
+  @media (min-width: 1120px) {
+    font-size: 48px;
+    text-align: center;
+  }`;
 
 
   return (
@@ -112,15 +182,23 @@ export default () => {
           <Subtitle>Learn More About How You Listen To Music</Subtitle>
         </Titles>
         <Icons>
+          <Icon width="80" height="90" icon={spotifyIcon} />
+          <IconSubtitle>+</IconSubtitle>
+          <Icon width="80" height="90" icon={codeIcon} />
+        </Icons>
+        <LargeIcons>
           <Icon width="220" height="170" icon={spotifyIcon} />
           <IconSubtitle>+</IconSubtitle>
           <Icon width="220" height="170" icon={codeIcon} />
-        </Icons>
-      </Info>
-      <Hills>
+        </LargeIcons>
         <Anchor href={authorize()}>
           <Button>Get Started</Button>
         </Anchor>
+      </Info>
+      <Hills>
+        <LargeAnchor href={authorize()}>
+          <Button>Get Started</Button>
+        </LargeAnchor>
         <HillContainer>
           <svg width="1440" height="324" viewBox="0 0 1440 324" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M38 284.319L50.8517 279.726C62.535 275.133 87.07 265.946 111.605 252.166C136.14 238.386 160.675 220.012 185.21 197.046C209.745 174.079 234.28 146.519 258.815 155.705C284.518 164.892 309.053 210.826 333.588 215.419C358.123 220.012 382.658 183.266 407.193 164.892C431.728 146.519 456.263 146.519 480.798 169.485C505.333 192.452 529.868 238.386 554.403 256.759C578.938 275.133 603.473 265.946 628.008 242.979C652.543 220.012 677.078 183.266 701.613 160.299C726.148 137.332 751.852 128.145 776.387 123.552C800.922 118.959 825.457 118.959 849.992 137.332C874.527 155.705 899.062 192.452 923.597 187.859C948.132 183.266 972.667 137.332 997.202 137.332C1021.74 137.332 1046.27 183.266 1070.81 215.419C1095.34 247.573 1119.88 265.946 1144.41 256.759C1168.95 247.573 1193.48 210.826 1219.18 224.606C1243.72 238.386 1268.26 302.693 1292.79 298.1C1317.32 293.506 1341.86 220.012 1366.39 192.452C1390.93 164.892 1415.46 183.266 1427.15 192.452L1440 201.639V367H1427.15C1415.46 367 1390.93 367 1366.39 367C1341.86 367 1317.32 367 1292.79 367C1268.26 367 1243.72 367 1219.18 367C1193.48 367 1168.95 367 1144.41 367C1119.88 367 1095.34 367 1070.81 367C1046.27 367 1021.74 367 997.202 367C972.667 367 948.132 367 923.597 367C899.062 367 874.527 367 849.992 367C825.457 367 800.922 367 776.387 367C751.852 367 726.148 367 701.613 367C677.078 367 652.543 367 628.008 367C603.473 367 578.938 367 554.403 367C529.868 367 505.333 367 480.798 367C456.263 367 431.728 367 407.193 367C382.658 367 358.123 367 333.588 367C309.053 367 284.518 367 258.815 367C234.28 367 209.745 367 185.21 367C160.675 367 136.14 367 111.605 367C87.07 367 62.535 367 50.8517 367H38V284.319Z" fill="#EFFC56" />
