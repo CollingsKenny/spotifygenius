@@ -5,27 +5,27 @@ import adjustmentsIcon from '@iconify/icons-heroicons-outline/adjustments';
 import clockIcon from '@iconify/icons-heroicons-outline/clock';
 
 const FilterContainer = styled.article`
-    display:flex;
-    flex-direction:column;
-    padding:4rem 2rem;
+display: flex;
+flex-direction: column;
+padding: 4rem 2rem;
 `;
 const OptionContainer = styled.div`
-    display:inherit;
-    flex-direction:inherit;
-    justify-content:center;
-    align-items:center;
-    margin: 1rem 0;
-  
+display: inherit;
+flex-direction: inherit;
+align-items: center;
+justify-content: center;
+margin: 1rem 0;
+
 `;
 const IconContainer = styled.div`
-    padding:1rem 0;
+padding:1rem 0;
 `;
 const FilterInput = styled.div`
-    width:100%;
-    color:#FFF;
-    justify-content:center;
-    text-align:center;
-    border-bottom:3px solid #FFF;
+justify-content: center;
+width: 100%;
+border-bottom: 3px solid #FFFFFFF;
+color: #FFFFFF;
+text-align: center;
 `;
 const InputText = styled.h6`
     font-weight:bold;

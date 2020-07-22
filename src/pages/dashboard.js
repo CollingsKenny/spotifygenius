@@ -50,14 +50,12 @@ const CategoryTitle = styled.h2`
   font-size: 48px;
   color: #fff;
 `;
-
 const CategorySubTitle = styled.h2`
   font-family: Work Sans, -apple-system, BlinkMacSystemFont;
   font-weight: bold;
   font-size: 36px;
   color: #fff;
 `;
-
 const CategoryContentWrapper = styled.article`
   display: flex;
   flex-direction: column;
