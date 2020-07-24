@@ -7,6 +7,7 @@ import useGetTop, { TOP_PATHS } from '../libs/useGetTop';
 import ArtistList from '../containers/artistList';
 import SongList from '../containers/songList';
 import FilterGroup from '../containers/filterGroup';
+import colors from '../libs/colors';
 
 const Container = styled.div`
   padding: 1rem 4rem;
@@ -20,14 +21,14 @@ const Card = styled.article`
   width: 410px;
   max-height: 680px;
   border-radius: 50px;
-  background: #222222;
+  background: ${colors.dark0};
   text-align: left;
 `;
 
 const Title = styled.h2`
-  padding: 1rem 2rem 0;
   margin: 0;
-  color: #ffffff;
+  padding: 1rem 2rem 0;
+  color: ${colors.light};
   font-weight: bold;
   font-size: 40px;
   font-family: Work Sans, -apple-system, BlinkMacSystemFont, sans-serif;

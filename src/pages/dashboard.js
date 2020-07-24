@@ -15,12 +15,13 @@ import newspaperIcon from '@iconify/icons-heroicons-outline/newspaper';
 import emojiHappy from '@iconify/icons-heroicons-outline/emoji-happy';
 import userIcon from '@iconify/icons-heroicons-outline/user';
 import cogIcon from '@iconify/icons-heroicons-outline/cog';
+import colors from '../libs/colors';
 
 const Container = styled.main`
   display: flex;
   width: 100%;
   height: 900px;
-  background: #222222;
+  background: ${colors.dark0};
 `;
 
 const Frame = styled.div`
