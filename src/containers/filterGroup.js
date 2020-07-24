@@ -27,12 +27,17 @@ const FilterInput = styled.div`
   color: #ffffff;
   text-align: center;
 `;
-const InputText = styled.h6`
+const InputText = styled.h3`
   font-weight: bold;
   font-size: 28px;
 `;
 
-const FilterGroup = () => {
+const Input = styled.input`
+  font-weight: bold;
+  font-size: 28px;
+`;
+
+const FilterGroup = ({ params, onFilterChange }) => {
   return (
     <FilterContainer>
       <OptionContainer>
@@ -45,7 +50,7 @@ const FilterGroup = () => {
           ></Icon>
         </IconContainer>
         <FilterInput>
-          <InputText>15</InputText>
+          <Input name='limit' value={params.limit} onChange={onFilterChange} />
         </FilterInput>
       </OptionContainer>
       <OptionContainer>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 import { accessKey } from '../config';
@@ -48,8 +48,18 @@ const ScrollContainer = styled.div`
 
 const Top = () => {
   const accessToken = localStorage[accessKey];
-  const topTracks = useGetTop(TOP_PATHS.TRACKS, accessToken);
-  const topArtists = useGetTop(TOP_PATHS.ARTISTS, accessToken);
+  const [params, setParams] = useState({ limit: 30 });
+  const topTracks = useGetTop(TOP_PATHS.TRACKS, params.limit, accessToken);
+  const topArtists = useGetTop(TOP_PATHS.ARTISTS, params.limit, accessToken);
+
+  const handleFilterChange = (e) => {
+    const param = e.target.name;
+    let value = e.target.value;
+
+    setParams((prevParams) => {
+      return { ...prevParams, [param]: value };
+    });
+  };
 
   return (
     <Container>
@@ -61,7 +71,7 @@ const Top = () => {
             <ArtistList artists={topArtists} />
           </ScrollContainer>
         </Card>
-        <FilterGroup />
+        <FilterGroup params={params} onFilterChange={handleFilterChange} />
         <Card>
           <Title>Tracks</Title>
           <ScrollContainer>

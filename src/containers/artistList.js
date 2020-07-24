@@ -21,6 +21,8 @@ const ArtistList = ({ artists }) => {
     <Ul>
       {artists.loading ? (
         <Li>Loading...</Li>
+      ) : !artists.data ? (
+        <Li>Error</Li>
       ) : (
         artists.data.map((artist) => {
           if (artist.name === 'Kanye West')

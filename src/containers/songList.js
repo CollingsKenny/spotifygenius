@@ -17,21 +17,21 @@ const Li = styled.li`
 
 const SongList = ({ tracks }) => {
   return (
-    <div>
-      <Ul>
-        {tracks.loading ? (
-          <Li>Loading...</Li>
-        ) : (
-          tracks.data.map((track, index) => {
-            return (
-              <Li key={track.id}>
-                {track.album.artists[0].name} - {track.name}{' '}
-              </Li>
-            );
-          })
-        )}
-      </Ul>
-    </div>
+    <Ul>
+      {tracks.loading ? (
+        <Li>Loading...</Li>
+      ) : !tracks.data ? (
+        <Li>Error</Li>
+      ) : (
+        tracks.data.map((track, index) => {
+          return (
+            <Li key={track.id}>
+              {track.album.artists[0].name} - {track.name}{' '}
+            </Li>
+          );
+        })
+      )}
+    </Ul>
   );
 };
 
