@@ -16,31 +16,16 @@ const Li = styled.ul`
   overflow-x: hidden;
 `;
 
-const convertValenceToEmoji = (valence) => {
-  if (valence < 0.1) return '😭';
-  else if (valence < 0.2) return '😩';
-  else if (valence < 0.3) return '☹️';
-  else if (valence < 0.4) return '🙁';
-  else if (valence < 0.5) return '😐';
-  else if (valence < 0.6) return '🙂';
-  else if (valence < 0.7) return '😀';
-  else if (valence < 0.8) return '😄';
-  else return '😁';
-};
-
-const SongList = ({ tracks, features }) => {
+const SongList = ({ tracks }) => {
   return (
     <div>
       <Ul>
-        {!tracks || !features ? (
+        {tracks.loading ? (
           <Li>Loading...</Li>
         ) : (
-          tracks.map((track, index) => {
+          tracks.data.map((track, index) => {
             return (
               <Li key={track.id}>
-                <span role='img'>
-                  {convertValenceToEmoji(features[index].valence)}
-                </span>{' '}
                 {track.album.artists[0].name} - {track.name}{' '}
               </Li>
             );

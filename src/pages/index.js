@@ -21,7 +21,7 @@ export default () => {
   `;
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div>
       <h1>Welcome to Spotify Genius</h1>
       <a href={authorize()}>
         <Button>Log in to Spotify</Button>

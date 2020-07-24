@@ -18,14 +18,13 @@ const Li = styled.ul`
 `;
 
 const ArtistList = ({ artists }) => {
-  console.log(artists);
   return (
     <div>
       <Ul>
-        {!artists ? (
+        {artists.loading ? (
           <Li>Loading...</Li>
         ) : (
-          artists.map((artist) => {
+          artists.data.map((artist) => {
             if (artist.name === 'Kanye West')
               return (
                 <Li key={artist.id}>

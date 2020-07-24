@@ -6,8 +6,7 @@
     "stage": "react-static build --staging",
     "build": "react-static build",
     "analyze": "react-static build --analyze",
-    "serve": "serve dist -p 3000",
-    "lint:css": "stylelint ./src/pages/dashboard.js"
+    "serve": "serve dist -p 3000"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
