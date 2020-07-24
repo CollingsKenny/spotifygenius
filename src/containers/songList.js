@@ -3,12 +3,11 @@ import styled from '@emotion/styled';
 
 const Ul = styled.ul`
   padding: 0 2rem;
-  overflow-y: scroll;
   list-style: disc;
   white-space: nowrap;
 `;
 
-const Li = styled.ul`
+const Li = styled.li`
   margin: 0.5rem 0;
   font-size: 20px;
   font-weight: bold;

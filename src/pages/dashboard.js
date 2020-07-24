@@ -72,6 +72,11 @@ const NavItemIcon = ({ icon }) => {
   );
 };
 
+const DashPage = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 function Test() {
   const accessToken = localStorage[accessKey];
   const profile = useGetProfile(accessToken);
@@ -105,7 +110,7 @@ function Test() {
             <NavItemIcon icon={userIcon} />
             <NavItemIcon icon={cogIcon} />
           </Nav>
-          <div>{dashPageIndex === 0 && <Top />}</div>
+          <DashPage>{dashPageIndex === 0 && <Top />}</DashPage>
         </Frame>
       </Container>
     );
