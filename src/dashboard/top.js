@@ -6,7 +6,6 @@ import useGetTop, { TOP_PATHS } from '../libs/useGetTop';
 
 import ArtistList from '../containers/artistList';
 import SongList from '../containers/songList';
-import FilterGroup from '../containers/filterGroup';
 import colors from '../libs/colors';
 
 const Container = styled.div`
@@ -26,8 +25,25 @@ const Card = styled.article`
 `;
 
 const Title = styled.h2`
+  display: inline-block;
   margin: 0;
-  padding: 1rem 2rem 0;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  color: ${colors.light};
+
+  font-weight: bold;
+  font-size: 40px;
+  font-family: Work Sans, -apple-system, BlinkMacSystemFont, sans-serif;
+`;
+
+const Select = styled.select`
+  display: inline-block;
+  margin: 0;
+  padding-top: 1rem;
+  padding-left: 0;
+
+  border: none;
+  background: transparent;
   color: ${colors.light};
   font-weight: bold;
   font-size: 40px;
@@ -48,22 +64,26 @@ const ScrollContainer = styled.div`
 
 const Top = () => {
   const accessToken = localStorage[accessKey];
-  const [params, setParams] = useState({ limit: 30 });
-  const topTracks = useGetTop(TOP_PATHS.TRACKS, params.limit, accessToken);
-  const topArtists = useGetTop(TOP_PATHS.ARTISTS, params.limit, accessToken);
+  const [params, setParams] = useState({ timeRange: 'short_term' });
+  const topTracks = useGetTop(TOP_PATHS.TRACKS, params.timeRange, accessToken);
+  const topArtists = useGetTop(
+    TOP_PATHS.ARTISTS,
+    params.timeRange,
+    accessToken
+  );
 
-  const handleFilterChange = (e) => {
-    const param = e.target.name;
-    let value = e.target.value;
-
-    setParams((prevParams) => {
-      return { ...prevParams, [param]: value };
-    });
+  const handleChange = (event) => {
+    setParams({ [event.target.name]: event.target.value });
   };
 
   return (
     <Container>
-      <Title>Top Artists & Songs This Month</Title>
+      <Title>Top Artists & Songs</Title>{' '}
+      <Select name='timeRange' value={params.timeRange} onChange={handleChange}>
+        <option value='short_term'>This Month</option>
+        <option value='medium_term'>This Year</option>
+        <option value='long_term'>All Time</option>
+      </Select>
       <ContentContainer>
         <Card>
           <Title>Artists</Title>
@@ -71,7 +91,6 @@ const Top = () => {
             <ArtistList artists={topArtists} />
           </ScrollContainer>
         </Card>
-        <FilterGroup params={params} onFilterChange={handleFilterChange} />
         <Card>
           <Title>Tracks</Title>
           <ScrollContainer>

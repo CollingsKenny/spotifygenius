@@ -10,26 +10,24 @@ export const TOP_PATHS = {
   TRACKS: 'tracks',
 };
 
-export default function useGetTop(type, limit, accessToken) {
+export default function useGetTop(type, time_range, accessToken) {
   const [state, dispatch] = useReducer(reducer, { user: null, loading: true });
 
   useEffect(() => {
-    if (limit) {
-      dispatch({ type: ACTIONS.MAKE_REQUEST });
-      axios({
-        method: 'get',
-        url: `${ENDPOINT}/${type}`,
-        params: { limit },
-        headers: { Authorization: `Bearer ${accessToken}` },
+    dispatch({ type: ACTIONS.MAKE_REQUEST });
+    axios({
+      method: 'get',
+      url: `${ENDPOINT}/${type}`,
+      params: { time_range },
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+      .then(({ data }) => {
+        dispatch({ type: ACTIONS.GET_DATA, payload: { data: data.items } });
       })
-        .then(({ data }) => {
-          dispatch({ type: ACTIONS.GET_DATA, payload: { data: data.items } });
-        })
-        .catch((error) => {
-          dispatch({ type: ACTIONS.ERROR, payload: { error } });
-        });
-    }
-  }, [type, limit, accessToken]);
+      .catch((error) => {
+        dispatch({ type: ACTIONS.ERROR, payload: { error } });
+      });
+  }, [type, time_range, accessToken]);
 
   return state;
 }
